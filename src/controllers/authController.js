@@ -16,7 +16,7 @@ exports.register = async (req, res) => {
         await user.save();
 
         const payload = { user: { id: user.id, role: user.role } };
-        jwt.sign(payload, 'your-jwt-secret', { expiresIn: '1h' }, (err, token) => {
+        jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '1h' }, (err, token) => {
             if (err) throw err;
             res.json({ token });
         });
@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
         }
 
         const payload = { user: { id: user.id, role: user.role } };
-        jwt.sign(payload, 'your-jwt-secret', { expiresIn: '1h' }, (err, token) => {
+        jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '1h' }, (err, token) => {
             if (err) throw err;
             res.json({ token });
         });
